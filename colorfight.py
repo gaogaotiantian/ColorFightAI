@@ -59,13 +59,11 @@ class Game:
             if r.status_code == 200:
                 data = r.json()
                 if data['err_code'] == 0:
-                    print "attack success on ({}, {})".format(x,y)
                     return True
-                else:
-                    print data['err_msg']
         else:
             print "You need to join the game first!"
-        return False, data['err_code']
+            return False, None
+        return False, data['err_msg']
 
     def GetCell(self,x,y):
         if 0 <= x < self.width and 0 <= y < self.height:
@@ -78,20 +76,3 @@ class Game:
         self.width = self.data['info']['width']
         self.height = self.data['info']['height']
         self.currTime = self.data['info']['time']
-
-if __name__ == '__main__':
-    g = Game()
-    g.JoinGame('gaotiantian')
-    while True:
-        for x in range(g.width):
-            for y in range(g.height):
-                c = g.GetCell(x,y)
-                if c.owner == g.uid:
-                    d = random.choice([(0,1), (0,-1), (1, 0), (-1,0)])
-                    cc = g.GetCell(x+d[0], y+d[1])
-                    if cc != None:
-                        if cc.owner != g.uid:
-                            g.AttackCell(x+d[0], y+d[1])
-                            g.Refresh()
-    print dir(c)
-
