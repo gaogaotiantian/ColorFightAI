@@ -1,8 +1,8 @@
-#ColorFight!
+# ColorFight!
 
 ColorFight is a game where you try to occupy as many cells as possible on the map.
 
-##Rules
+## Rules
 
 * When you join the game, you will be given a random cell as a start.
 
@@ -30,7 +30,7 @@ After that, you can do the following actions:
 
 * `AttackCell(x,y)`is the only action you need to play the game. ex. `g.AttackCell(2,2)`. It will try to attack the cell you specified. Returning `True` means the action is successful. Otherwise it will return a tuple `(False, err_msg)` where `err_msg` will contain the reason it failed.
 
-##Cell Data
+## Cell Data
 
 * `owner`: who owns this cell now. It's a user id.
 
