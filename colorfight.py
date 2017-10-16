@@ -64,13 +64,14 @@ class Game:
             if r.status_code == 200:
                 data = r.json()
                 if data['err_code'] == 0:
-                    return True
+                    return True, None, None
+                else:
+                    return False, data['err_code'], data['err_msg']
             else:
-                print r
+                return False, None, "Server did not return correctly"
         else:
-            print "You need to join the game first!"
-            return False, None
-        return False, data['err_msg']
+            return False, None, "You need to join the game first!"
+
 
     def GetCell(self,x,y):
         if 0 <= x < self.width and 0 <= y < self.height:
