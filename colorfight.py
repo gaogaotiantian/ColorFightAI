@@ -28,10 +28,10 @@ class Cell:
 class Game:
     def __init__(self):
         self.data = None
-        self.Refresh()
         self.token = ''
         self.name  = ''
         self.uid   = -1
+        self.Refresh()
 
     def JoinGame(self, name, force = False):
         if force == False and os.path.isfile('token'):
@@ -43,6 +43,8 @@ class Game:
                         self.name = data['name']
                         self.uid  = data['uid']
                         return True
+                else:
+                    return False
     
         headers = {'content-type': 'application/json'}
         r = requests.post(hostUrl + 'joingame', data=json.dumps({'name':name}), headers = headers)
@@ -51,6 +53,7 @@ class Game:
             f.write(data['token'] + '\n')
         self.token = data['token']
         self.uid   = data['uid']
+        self.Refresh()
 
         return True
 
