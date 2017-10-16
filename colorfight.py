@@ -43,8 +43,6 @@ class Game:
                         self.name = data['name']
                         self.uid  = data['uid']
                         return True
-                else:
-                    return False
     
         headers = {'content-type': 'application/json'}
         r = requests.post(hostUrl + 'joingame', data=json.dumps({'name':name}), headers = headers)
