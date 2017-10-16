@@ -4,6 +4,7 @@ import os
 import random
 
 hostUrl   = 'https://colorfight.herokuapp.com/'
+#hostUrl   = 'http://localhost:8000/'
 
 def CheckToken(token):
     headers = {'content-type': 'application/json'}
@@ -26,6 +27,7 @@ class Cell:
 
 class Game:
     def __init__(self):
+        self.data = None
         self.Refresh()
         self.token = ''
         self.name  = ''
@@ -60,6 +62,8 @@ class Game:
                 data = r.json()
                 if data['err_code'] == 0:
                     return True
+            else:
+                print r
         else:
             print "You need to join the game first!"
             return False, None
@@ -70,9 +74,37 @@ class Game:
             c = Cell(self.data['cells'][x+y*self.width])
             return c
         return None
+    def GetTakeTimeEq(self, timeDiff):
+        if timeDiff <= 0:
+            return 200
+        return 20*(2**(-timeDiff/20))+2
     def Refresh(self):
-        r = requests.get(hostUrl + 'getgameinfo')
-        self.data = r.json()
-        self.width = self.data['info']['width']
-        self.height = self.data['info']['height']
-        self.currTime = self.data['info']['time']
+        headers = {'content-type': 'application/json'}
+        if self.data == None:
+            r = requests.post(hostUrl + 'getgameinfo', data=json.dumps({"protocol":1}), headers = headers)
+            if r.status_code == 200:
+                self.data = r.json()
+                self.width = self.data['info']['width']
+                self.height = self.data['info']['height']
+                self.currTime = self.data['info']['time']
+                self.lastUpdate = self.currTime
+        else:
+            r = requests.post(hostUrl + 'getgameinfo', data=json.dumps({"protocol":1, "timeAfter":self.lastUpdate}), headers = headers)
+            d = r.json()
+            self.width = d['info']['width']
+            self.height = d['info']['height']
+            self.currTime = d['info']['time']
+            self.lastUpdate = self.currTime
+            for c in d['cells']:
+                cid = c['x'] + c['y']*self.width
+                self.data['cells'][cid] = c
+            for cell in self.data['cells']:
+                if cell['c'] == 1:
+                    cell['t'] = -1
+                else:
+                    if cell['o'] == 0:
+                        cell['t'] = 1;
+                    else:
+                        cell['t'] = self.GetTakeTimeEq(self.currTime - cell['ot'])
+
+

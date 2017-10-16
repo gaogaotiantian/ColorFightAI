@@ -14,5 +14,5 @@ if __name__ == '__main__':
                     cc = g.GetCell(x+d[0], y+d[1])
                     if cc != None:
                         if cc.owner != g.uid:
-                            g.AttackCell(x+d[0], y+d[1])
+                            print g.AttackCell(x+d[0], y+d[1])
                             g.Refresh()
