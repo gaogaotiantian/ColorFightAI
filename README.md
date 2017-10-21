@@ -24,13 +24,13 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 * `JoinGame(name)` will let you join the game with a name. ex. `g.JoinGame('MyAI')`. Notice the API is already optimized so when you try to join the game with the same name on the same computer(with the generated token file), it will not generate a user. You can continue to play the game as the user before.
 
-* `Refresh()` will get the current game data from the server. ex. `g.Refresh()`. This function will store the raw data into `self.data` which you can access if you want. Also this function will fill in `self.width` and `self.height` for the game, as well as `self.currTime` for the time of this information.
+* `Refresh()` will get the current game data from the server. ex. `g.Refresh()`. This function will store the raw data into `self.data` which you can access if you want. Also this function will fill in `self.width` and `self.height` for the game, as well as `self.currTime` for the time of this information. For game that has a end time, `self.endTime` will be updated, otherwise it will be `0`.
 
 * `GetCell(x,y)` is a easy way to access the data of one cell. ex. `g.GetCell(1,2)`. The function will return a `Cell` object which has all the data of a single cell at (x,y). If the pair (x,y) given is invalid, it will return `None`
 
-* `AttackCell(x,y)`is the only action you need to play the game. ex. `g.AttackCell(2,2)`. It will try to attack the cell you specified. Returning `True` means the action is successful. Otherwise it will return a tuple `(False, err_code, err_msg)` where `err_code` will contain the error code from the server and `err_msg` will contain the reason it failed.
+* `AttackCell(x,y)`is the only action you need to play the game. ex. `g.AttackCell(2,2)`. It will try to attack the cell you specified. The return value will be a tuple with 3 items. Returning `(True, None, None)` means the action is successful. Otherwise it will return a tuple `(False, err_code, err_msg)` where `err_code` will contain the error code from the server and `err_msg` will contain the reason it failed.
 
-### You also have the following data in Game:
+### You also have the following data in `Game`:
 
 * `uid` contains your user id. That's the unique identification for you.
 
