@@ -20,7 +20,7 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 `Game` is the main class for the API. You should instantiate an object for it like `g = Game()`.
 
-After that, you can do the following actions:
+### After that, you can do the following actions:
 
 * `JoinGame(name)` will let you join the game with a name. ex. `g.JoinGame('MyAI')`. Notice the API is already optimized so when you try to join the game with the same name on the same computer(with the generated token file), it will not generate a user. You can continue to play the game as the user before.
 
@@ -29,6 +29,18 @@ After that, you can do the following actions:
 * `GetCell(x,y)` is a easy way to access the data of one cell. ex. `g.GetCell(1,2)`. The function will return a `Cell` object which has all the data of a single cell at (x,y). If the pair (x,y) given is invalid, it will return `None`
 
 * `AttackCell(x,y)`is the only action you need to play the game. ex. `g.AttackCell(2,2)`. It will try to attack the cell you specified. Returning `True` means the action is successful. Otherwise it will return a tuple `(False, err_msg)` where `err_msg` will contain the reason it failed.
+
+### You also have the following data in Game:
+
+* `uid` contains your user id. That's the unique identification for you.
+
+* `endTime` is the time when the current game will end. If it's `0`, it's unlimited time game. 
+
+* `width` and `height` contains the width and height of the current game.
+
+* `currTime` is the current time of the current data from the server.
+
+* `users` is a list of `User` object which has all the user info.
 
 ## Cell Data
 
@@ -49,3 +61,13 @@ After that, you can do the following actions:
 * `takeTime`: how long it would take if you attack this cell
 
 * `finishTime`: when will the attack finish. Invalid if `isTaking` is `False`
+
+## User Data
+
+* `id`: unique user identification.
+
+* `name`: user name.
+
+* `cdTime`: when can this user attack again.
+
+* `cellNum`: how many cells does this user occupy.
