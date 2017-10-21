@@ -25,12 +25,21 @@ class Cell:
         self.takeTime   = cellData['t']
         self.finishTime = cellData['f']
 
+class User:
+    def __init__(self, userData):
+        self.id         = userData['id']
+        self.name       = userData['name']
+        self.cdTime     = userData['cd_time']
+        self.cellNum    = userData['cell_num']
+
 class Game:
     def __init__(self):
         self.data = None
         self.token = ''
         self.name  = ''
         self.uid   = -1
+        self.endTime = 0
+        self.users = []
         self.Refresh()
 
     def JoinGame(self, name, force = False):
@@ -80,6 +89,10 @@ class Game:
         if timeDiff <= 0:
             return 200
         return 20*(2**(-timeDiff/20))+2
+    def RefreshUsers(self, usersData):
+        self.users = []
+        for userData in usersData:
+            self.users.append(User(userData))
     def Refresh(self):
         headers = {'content-type': 'application/json'}
         if self.data == None:
@@ -89,14 +102,20 @@ class Game:
                 self.width = self.data['info']['width']
                 self.height = self.data['info']['height']
                 self.currTime = self.data['info']['time']
+                self.endTime = self.data['info']['end_time']
                 self.lastUpdate = self.currTime
+                self.RefreshUsers(self.data['users'])
         else:
             r = requests.post(hostUrl + 'getgameinfo', data=json.dumps({"protocol":1, "timeAfter":self.lastUpdate}), headers = headers)
             d = r.json()
+            self.data['info'] = d['info']
+            self.data['users'] = d['users']
             self.width = d['info']['width']
             self.height = d['info']['height']
             self.currTime = d['info']['time']
+            self.endTime = self.data['info']['end_time']
             self.lastUpdate = self.currTime
+            self.RefreshUsers(self.data['users'])
             for c in d['cells']:
                 cid = c['x'] + c['y']*self.width
                 self.data['cells'][cid] = c
