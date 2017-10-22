@@ -35,6 +35,6 @@ if __name__ == '__main__':
                             # if (True, None, None) is printed, it means attack
                             # is successful, otherwise it will print the error
                             # code and error message
-                            print g.AttackCell(x+d[0], y+d[1])
+                            print(g.AttackCell(x+d[0], y+d[1]))
                             # Refresh the game, get updated game data
                             g.Refresh()
