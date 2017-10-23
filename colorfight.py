@@ -43,6 +43,9 @@ class Game:
         self.Refresh()
 
     def JoinGame(self, name, force = False):
+        if type(name) != str:
+            print "Your name has to be a string!"
+            return False
         if force == False and os.path.isfile('token'):
             with open('token') as f:
                 self.token = f.readline().strip()
