@@ -44,7 +44,7 @@ class Game:
 
     def JoinGame(self, name, force = False):
         if type(name) != str:
-            print "Your name has to be a string!"
+            print("Your name has to be a string!")
             return False
         if force == False and os.path.isfile('token'):
             with open('token') as f:
