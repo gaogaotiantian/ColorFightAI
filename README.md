@@ -16,13 +16,15 @@ ColorFight is a game where you try to occupy as many cells as possible on the ma
 
 ## How To Start
 
-First clone the git repository. `git clone https://github.com/gaogaotiantian/ColorFightAI.git`
+* First clone the git repository. `git clone https://github.com/gaogaotiantian/ColorFightAI.git`
 
-Then you can run the exampleAI by `python exampleAI.py`
+* Then you can run the exampleAI by `python exampleAI.py`
 
-If your computer complains about `requests` module, try `pip install requests[security]` or `sudo pip install requests[security]` if it complains about privilege. 
+* If your computer complains about `requests` module, try `pip install requests[security]` or `sudo pip install requests[security]` if it complains about privilege. 
 
-Or you can use python3 by `python3 exampleAI.py`. The library and the exampleAI support both python2 and python3. 
+* Or you can use python3 by `python3 exampleAI.py`. The library and the exampleAI support both python2 and python3. 
+
+* You can watch the result here [https://colorfight.herokuapp.com/](https://colorfight.herokuapp.com)
 
 ## API
 
