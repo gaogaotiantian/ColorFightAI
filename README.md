@@ -10,7 +10,7 @@ ColorFight is a game where you try to occupy as many cells as possible on the ma
 
 * You can only attack one cell at a time. During that time, you are not able to attack other cells.
 
-* The time you need to occupy a cell is based on the last time when the cell is occupied. The longer the time is, the easier it would be to be attacked. The minimum time to occupy a cell is 2s.
+* The time you need to occupy a cell is based on the last time when the cell is occupied. The longer the time is, the easier it would be to be attacked. The minimum time to occupy a cell is 2s. (The equation of the time to occupy is ```2 + 20 * (2 ^ (-x/20))```. So when it's just occupied, it takes 22s to attack it. After 20s, it becomes 12s. After around 55s, it becomes 5s)
 
 * You can attack your own cell to refresh the occupy time, but it would take the same amount of time as other players attacking it.
 
