@@ -25,12 +25,29 @@ class Cell:
         self.takeTime   = cellData['t']
         self.finishTime = cellData['f']
 
+    def __repr__(self):
+        s = ""
+        s += "({x}, {y}), owner is {owner}\n".format(x = self.x, y = self.y, owner = self.owner)
+        if self.isTaking:
+            s += "Cell is being attacked\n"
+            s += "Attacker is {attacker}\n".format(attacker = self.attacker)
+            s += "Attack time is {atkTime}\n".format(atkTime = self.attackTime)
+            s += "Finish time is {finishTime}\n".format(finishTime = self.finishTime)
+        else:
+            s += "Cell is not being attacked\n"
+            s += "Cell is occupied at {occupyTime}\n".format(occupyTime = self.occupyTime)
+            s += "Take time is {takeTime}\n".format(takeTime = self.takeTime)
+        return s
+
 class User:
     def __init__(self, userData):
         self.id         = userData['id']
         self.name       = userData['name']
         self.cdTime     = userData['cd_time']
         self.cellNum    = userData['cell_num']
+    
+    def __repr__(self):
+        return "uid: {}\nname: {}\ncd time: {}\ncell number: {}\n".format(self.id, self.name, self.cdTime, self.cellNum)
 
 class Game:
     def __init__(self):
