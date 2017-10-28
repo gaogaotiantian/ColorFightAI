@@ -24,6 +24,8 @@ class Cell:
         self.attackTime = cellData['at']
         self.takeTime   = cellData['t']
         self.finishTime = cellData['f']
+        if 'ct' in cellData:
+            self.cellType = cellData['ct']
 
     def __repr__(self):
         s = ""
