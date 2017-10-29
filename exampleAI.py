@@ -37,4 +37,5 @@ if __name__ == '__main__':
                             # code and error message
                             print(g.AttackCell(x+d[0], y+d[1]))
                             # Refresh the game, get updated game data
-                            g.Refresh()
+                            if not g.Refresh():
+                                print("Warning! Refresh did not finish!")
