@@ -127,27 +127,33 @@ class Game:
                 self.endTime = self.data['info']['end_time']
                 self.lastUpdate = self.currTime
                 self.RefreshUsers(self.data['users'])
+            else:
+                return False
         else:
             r = requests.post(hostUrl + 'getgameinfo', data=json.dumps({"protocol":1, "timeAfter":self.lastUpdate}), headers = headers)
-            d = r.json()
-            self.data['info'] = d['info']
-            self.data['users'] = d['users']
-            self.width = d['info']['width']
-            self.height = d['info']['height']
-            self.currTime = d['info']['time']
-            self.endTime = self.data['info']['end_time']
-            self.lastUpdate = self.currTime
-            self.RefreshUsers(self.data['users'])
-            for c in d['cells']:
-                cid = c['x'] + c['y']*self.width
-                self.data['cells'][cid] = c
-            for cell in self.data['cells']:
-                if cell['c'] == 1:
-                    cell['t'] = -1
-                else:
-                    if cell['o'] == 0:
-                        cell['t'] = 2;
+            if r.status_code == 200:
+                d = r.json()
+                self.data['info'] = d['info']
+                self.data['users'] = d['users']
+                self.width = d['info']['width']
+                self.height = d['info']['height']
+                self.currTime = d['info']['time']
+                self.endTime = self.data['info']['end_time']
+                self.lastUpdate = self.currTime
+                self.RefreshUsers(self.data['users'])
+                for c in d['cells']:
+                    cid = c['x'] + c['y']*self.width
+                    self.data['cells'][cid] = c
+                for cell in self.data['cells']:
+                    if cell['c'] == 1:
+                        cell['t'] = -1
                     else:
-                        cell['t'] = self.GetTakeTimeEq(self.currTime - cell['ot'])
+                        if cell['o'] == 0:
+                            cell['t'] = 2;
+                        else:
+                            cell['t'] = self.GetTakeTimeEq(self.currTime - cell['ot'])
+            else:
+                return False
+        return True
 
 
