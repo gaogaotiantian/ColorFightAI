@@ -14,6 +14,8 @@ ColorFight is a game where you try to occupy as many cells as possible on the ma
 
 * You can attack your own cell to refresh the occupy time, but it would take the same amount of time as other players attacking it.
 
+* Gold cells worth 5 times as normal cells.
+
 ## How To Start
 
 * First clone the git repository. `git clone https://github.com/gaogaotiantian/ColorFightAI.git`
@@ -73,6 +75,8 @@ The module provided some API for the game. You are welcome to add your own API, 
 * `takeTime`: how long it would take if you attack this cell. This is a number of seconds.
 
 * `finishTime`: when will the attack finish. Invalid if `isTaking` is `False`. This is a timestamp from the server.
+
+* `cellType`: `'gold'` if it's gold cell and `'normal' if it's a normal cell.`
 
 ## User Data
 
