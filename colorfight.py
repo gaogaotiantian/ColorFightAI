@@ -42,7 +42,7 @@ class Game:
         self.users = []
         self.Refresh()
 
-    def JoinGame(self, name, force = False):
+    def JoinGame(self, name, password = None, force = False):
         if type(name) != str:
             print("Your name has to be a string!")
             return False
@@ -57,13 +57,19 @@ class Game:
                         return True
     
         headers = {'content-type': 'application/json'}
-        r = requests.post(hostUrl + 'joingame', data=json.dumps({'name':name}), headers = headers)
-        data = r.json()
-        with open('token', 'w') as f:
-            f.write(data['token'] + '\n')
-        self.token = data['token']
-        self.uid   = data['uid']
-        self.Refresh()
+        data = {'name':name}
+        if password != None:
+            data['password'] = password
+        r = requests.post(hostUrl + 'joingame', data=json.dumps(data), headers = headers)
+        if r.status_code == 200:
+            data = r.json()
+            with open('token', 'w') as f:
+                f.write(data['token'] + '\n')
+            self.token = data['token']
+            self.uid   = data['uid']
+            self.Refresh()
+        else:
+            return False
 
         return True
 
