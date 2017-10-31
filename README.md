@@ -10,11 +10,11 @@ ColorFight is a game where you try to occupy as many cells as possible on the ma
 
 * You can only attack one cell at a time. During that time, you are not able to attack other cells.
 
-* The time you need to occupy a cell is based on the last time when the cell is occupied. The longer the time is, the easier it would be to be attacked. The minimum time to occupy a cell is 2s. (The equation of the time to occupy is ```2 + 20 * (2 ^ (-x/20))```. So when it's just occupied, it takes 22s to attack it. After 20s, it becomes 12s. After around 55s, it becomes 5s)
+* The time you need to occupy a cell is based on the last time when the cell is occupied. The longer the time is, the easier it would be to be attacked. The minimum time to occupy a cell is 2s. (The equation of the time to occupy is ```2 + 20 * (2 ^ (-x/20))```. So when it's just occupied, it takes 22s to attack it. After 20s, it becomes 12s. After around 55s, it becomes 5s). If the cell is surrounded by more than 1 attacker's occupied cell, the time to take it is decreased. One extra adjacent cell takes off 0.5s to take the cell.
 
 * You can attack your own cell to refresh the occupy time, but it would take the same amount of time as other players attacking it.
 
-* Gold cells worth 5 times as normal cells.
+* Golden cells worth 5 times as normal cells.
 
 ## How To Start
 
@@ -56,6 +56,10 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 * `users` is a list of `User` object which has all the user info.
 
+* `cdTime` is your cd time
+
+* `cellNum` is your cell number
+
 ## Cell Data
 
 * `owner`: who owns this cell now. It's a user id.
@@ -76,7 +80,7 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 * `finishTime`: when will the attack finish. Invalid if `isTaking` is `False`. This is a timestamp from the server.
 
-* `cellType`: `'gold'` if it's gold cell and `'normal' if it's a normal cell.`
+* `cellType`: `'gold'` if it's golden cell and `'normal'` if it's a normal cell.`
 
 ## User Data
 
@@ -97,3 +101,5 @@ The module provided some API for the game. You are welcome to add your own API, 
 * 2: The cell you attack is being taken by another player.
 
 * 3: You are in CD time. You can't attack any cell now.
+
+* 4: The game already ends
