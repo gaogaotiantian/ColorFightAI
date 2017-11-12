@@ -18,7 +18,7 @@ ColorFight is a game where you try to occupy as many cells as possible on the ma
 
 * Your energy will accumulate 1 per second per energy cell you occupied. The maximum energy is 100.
 
-* The time to take a cell will be divided by (1 + energy/200).
+* The time to take a cell will be divided by (1 + energy/100).
 
 * Attacking other player's cell will cost you 5% of current energy.
 
