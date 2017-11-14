@@ -24,10 +24,10 @@ class Cell:
         self.attackTime = cellData['at']
         self.takeTime   = cellData['t']
         self.finishTime = cellData['f']
-        if 'ct' in cellData:
-            self.cellType = cellData['ct']
-        if 'b' in cellData:
-            self.isBase = cellData['b']
+        self.cellType   = cellData['ct']
+        self.isBase     = cellData['b']
+        self.isBuilding = cellData['bt'] != 0
+        self.buildTime  = cellData['bt']
 
     def __repr__(self):
         s = ""
