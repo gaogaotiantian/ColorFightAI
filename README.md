@@ -26,7 +26,7 @@ ColorFight is a game where you try to occupy as many cells as possible on the ma
 
 * If you lose all your bases, you will lose immediately. All your cells will become empty cells.
 
-* You can build a base on any cell that you occupy using 60 energy.
+* You can build a base on any cell that you occupy using 60 energy. Building a base takes 30s and each player can only have 3 bases. You can't build a base if you are currently building one.
 
 ## How To Start
 
@@ -98,6 +98,10 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 * `isBase`: if it's a base of the player.
 
+* `isBuilding`: if there's a base being built on the cell.
+
+* `buildTime`: when is the base built on this cell. If it's `0`, it means no base is currently be built on the cell.
+
 ## User Data
 
 * `id`: unique user identification.
@@ -125,3 +129,7 @@ The module provided some API for the game. You are welcome to add your own API, 
 * 5: You don't have enough energy.
 
 * 6: The cell is already a base.
+
+* 7: You are already building a base.
+
+* 8: You reached the base number limit.
