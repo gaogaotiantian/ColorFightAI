@@ -99,10 +99,10 @@ class Game:
 
         return True
 
-    def AttackCell(self, x, y):
+    def AttackCell(self, x, y, boost = False):
         if self.token != '':
             headers = {'content-type': 'application/json'}
-            r = requests.post(hostUrl + 'attack', data=json.dumps({'cellx':x, 'celly':y, 'token':self.token}), headers = headers)
+            r = requests.post(hostUrl + 'attack', data=json.dumps({'cellx':x, 'celly':y, 'boost': boost, 'token':self.token}), headers = headers)
             if r.status_code == 200:
                 data = r.json()
                 if data['err_code'] == 0:
