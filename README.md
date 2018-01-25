@@ -58,7 +58,7 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 * `GetCell(x,y)` is an easy way to access the data of one cell. ex. `g.GetCell(1,2)`. The function will return a `Cell` object which has all the data of a single cell at (x,y). If the pair (x,y) given is invalid, it will return `None`. x and y starts with `0`, and the maximum value is `g.width-1`, `g.height-1`, respectively.
 
-* `AttackCell(x,y<!--,boost=False-->)`is the attack action you need to play the game. ex. `g.AttackCell(2,2)`. It will try to attack the cell you specified. <!--`boost` argument is `False` by default. If you set that to `True`, it will try to use 10 energy to boost the attack, which means it will take 2 seconds to occupy the cell regardless of how long the cell is occupied. If you don't have enough energy, the action will fail. -->The return value will be a tuple with 3 items. Returning `(True, None, None)` means the action is successful. Otherwise it will return a tuple `(False, err_code, err_msg)` where `err_code` will contain the error code from the server and `err_msg` will contain the reason it failed.
+* <!--`AttackCell(x,y,boost=False)`-->`AttackCell(x,y)`is the attack action you need to play the game. ex. `g.AttackCell(2,2)`. It will try to attack the cell you specified. <!--`boost` argument is `False` by default. If you set that to `True`, it will try to use 10 energy to boost the attack, which means it will take 2 seconds to occupy the cell regardless of how long the cell is occupied. If you don't have enough energy, the action will fail. -->The return value will be a tuple with 3 items. Returning `(True, None, None)` means the action is successful. Otherwise it will return a tuple `(False, err_code, err_msg)` where `err_code` will contain the error code from the server and `err_msg` will contain the reason it failed.
 
 <!-- * `BuildBase(x,y)` is the action to build a new base. ex. `g.BuildBase(3,3)`. It will try to build a base on the cell you specified. The return value is similar to `AttackCell()`. -->
 
@@ -76,21 +76,21 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 * `users` is a list of `User` object which has all the user info.
 
-* `cdTime` is your cd time
+* `cdTime` is your cd time.
 
-* `cellNum` is your cell number
+* `cellNum` is your cell number.
 
 ## Cell Data
 
 * `owner`: who owns this cell now. It's a user id.
 
-* `attacker`: who is attacking this cell now. Invalid if `isTaking` is `False`.
-
-* `isTaking`: is this cell being attacked. If it's `True` then you can't attack it.
-
 * `x`: x coordinate.
 
 * `y`: y coordinate.
+
+* `isTaking`: is this cell being attacked. If it's `True` then you can't attack it.
+
+* `attacker`: who is attacking this cell now. Invalid if `isTaking` is `False`.
 
 * `occupyTime`: when is this cell occupied. Server side time in seconds. This is a timestamp from the server.
 
@@ -100,7 +100,7 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 * `finishTime`: when will the attack finish. Invalid if `isTaking` is `False`. This is a timestamp from the server.
 
-* `cellType`: `'gold'` if it's a golden cell, <!-- 'energy' if it's a energy cell and -->`'normal'` if it's a normal cell.`
+* `cellType`: `'gold'` if it's a golden cell, <!-- 'energy' if it's a energy cell and -->`'normal'` if it's a normal cell.
 
 <!-- * `isBase`: if it's a base of the player. -->
 
