@@ -3,8 +3,8 @@ import json
 import os
 import random
 
-hostUrl   = 'https://colorfight.herokuapp.com/'
-#hostUrl   = 'http://localhost:8000/'
+#hostUrl   = 'https://colorfight.herokuapp.com/'
+hostUrl   = 'http://localhost:8000/'
 
 def CheckToken(token):
     headers = {'content-type': 'application/json'}
@@ -51,6 +51,8 @@ class User:
         self.cellNum    = userData['cell_num']
         if 'energy' in userData:
             self.energy = userData['energy']
+        if 'gold' in userData:
+            self.gold = userData['gold']
     
     def __repr__(self):
         return "uid: {}\nname: {}\ncd time: {}\ncell number: {}\n".format(self.id, self.name, self.cdTime, self.cellNum)
@@ -66,6 +68,8 @@ class Game:
         self.cellNum = 0
         self.cdTime = 0
         self.energy = 0
+        self.gold = 0
+        self.gameVersion = ''
         self.Refresh()
 
     def JoinGame(self, name, password = None, force = False):
@@ -163,6 +167,7 @@ class Game:
             u = User(userData)
             self.users.append(u)
             if u.id == self.uid:
+                self.gold   = u.gold
                 self.energy = u.energy
                 self.cdTime = u.cdTime
                 self.cellNum = u.cellNum
