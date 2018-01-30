@@ -40,4 +40,4 @@ if __name__ == '__main__':
                                 # Refresh the game, get updated game data
                                 g.Refresh()
     else:
-        print "Failed to join the game!"
+        print("Failed to join the game!")
