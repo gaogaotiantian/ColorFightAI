@@ -3,8 +3,8 @@ import json
 import os
 import random
 
-hostUrl   = 'https://colorfight.herokuapp.com/'
-#hostUrl   = 'http://localhost:8000/'
+#hostUrl   = 'https://colorfight.herokuapp.com/'
+hostUrl   = 'http://localhost:8000/'
 
 def CheckToken(token):
     headers = {'content-type': 'application/json'}
@@ -25,8 +25,8 @@ class Cell:
         self.takeTime   = cellData['t']
         self.finishTime = cellData['f']
         self.cellType   = cellData['ct']
-        self.isBase     = cellData['b']
-        self.isBuilding = cellData['bt'] != 0
+        self.isBase     = cellData['b'] == "base"
+        self.isBuilding = cellData['bf'] == False
         self.buildTime  = cellData['bt']
 
     def __repr__(self):
