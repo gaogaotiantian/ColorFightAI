@@ -174,7 +174,7 @@ class Game:
     def Refresh(self):
         headers = {'content-type': 'application/json'}
         if self.data == None:
-            r = requests.post(hostUrl + 'getgameinfo', data=json.dumps({"protocol":1}), headers = headers)
+            r = requests.post(hostUrl + 'getgameinfo', data=json.dumps({"protocol":2}), headers = headers)
             if r.status_code == 200:
                 self.data = r.json()
                 self.width = self.data['info']['width']
