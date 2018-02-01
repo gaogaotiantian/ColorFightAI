@@ -25,6 +25,7 @@ class Cell:
         self.takeTime   = cellData['t']
         self.finishTime = cellData['f']
         self.cellType   = cellData['ct']
+        self.buildType  = cellData['b']
         self.isBase     = cellData['b'] == "base"
         self.isBuilding = cellData['bf'] == False
         self.buildTime  = cellData['bt']
