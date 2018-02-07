@@ -119,6 +119,10 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 * `cellNum`: how many cells does this user occupy.
 
+* `baseNum`: how many bases does this user occupy.
+
+* `goldCellNum`: how many golden cells does this user occupy.
+
 <!-- * `energy`: hou much energy does this user have. -->
 
 ## Error Code from AttackCell()<!-- and BuildBase() -->
