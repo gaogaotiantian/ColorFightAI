@@ -181,6 +181,7 @@ class Game:
                 self.baseNum = u.baseNum
                 self.goldCellNum = u.goldCellNum
                 self.energyCellNum = u.energyCellNum
+        self.users.sort(key = lambda x: x.cellNum, reverse = True)
     def Refresh(self):
         headers = {'content-type': 'application/json'}
         if self.data == None:
