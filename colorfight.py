@@ -167,7 +167,7 @@ class Game:
     def GetTakeTimeEq(self, timeDiff):
         if timeDiff <= 0:
             return 33
-        return 30*(2**(-timeDiff/30))+3
+        return 30*(2**(-timeDiff/30.0))+3
     def RefreshUsers(self, usersData):
         self.users = []
         for userData in usersData:
