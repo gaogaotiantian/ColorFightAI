@@ -22,7 +22,7 @@ if __name__ == '__main__':
                     c = g.GetCell(x,y)
                     # If the cell I got is mine
                     if c.owner == g.uid:
-                        if g.gold > 60:
+                        if g.gold > 60 and g.baseNum < 3:
                             print(g.BuildBase(x,y))
                         # Pick a random direction based on current cell 
                         d = random.choice([(0,1), (0,-1), (1, 0), (-1,0)])
