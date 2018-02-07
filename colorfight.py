@@ -45,10 +45,13 @@ class Cell:
 
 class User:
     def __init__(self, userData):
-        self.id         = userData['id']
-        self.name       = userData['name']
-        self.cdTime     = userData['cd_time']
-        self.cellNum    = userData['cell_num']
+        self.id            = userData['id']
+        self.name          = userData['name']
+        self.cdTime        = userData['cd_time']
+        self.cellNum       = userData['cell_num']
+        self.baseNum       = userData['base_num']
+        self.goldCellNum   = userData['gold_cell_num']
+        self.energyCellNum = userData['energy_cell_num']
         if 'energy' in userData:
             self.energy = userData['energy']
         if 'gold' in userData:
