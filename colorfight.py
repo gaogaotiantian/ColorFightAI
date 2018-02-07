@@ -70,6 +70,9 @@ class Game:
         self.endTime = 0
         self.users = []
         self.cellNum = 0
+        self.baseNum = 0
+        self.goldCellNum = 0
+        self.energyCellNum = 0
         self.cdTime = 0
         self.energy = 0
         self.gold = 0
@@ -175,6 +178,9 @@ class Game:
                 self.energy = u.energy
                 self.cdTime = u.cdTime
                 self.cellNum = u.cellNum
+                self.baseNum = u.baseNum
+                self.goldCellNum = u.goldCellNum
+                self.energyCellNum = u.energyCellNum
     def Refresh(self):
         headers = {'content-type': 'application/json'}
         if self.data == None:
