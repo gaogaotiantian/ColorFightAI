@@ -3,8 +3,8 @@ import json
 import os
 import random
 
-#hostUrl   = 'https://colorfight.herokuapp.com/'
-hostUrl   = 'http://localhost:8000/'
+hostUrl   = 'https://colorfight.herokuapp.com/'
+#hostUrl   = 'http://localhost:8000/'
 
 def CheckToken(token):
     headers = {'content-type': 'application/json'}
@@ -25,8 +25,9 @@ class Cell:
         self.takeTime   = cellData['t']
         self.finishTime = cellData['f']
         self.cellType   = cellData['ct']
-        self.isBase     = cellData['b']
-        self.isBuilding = cellData['bt'] != 0
+        self.buildType  = cellData['b']
+        self.isBase     = cellData['b'] == "base"
+        self.isBuilding = cellData['bf'] == False
         self.buildTime  = cellData['bt']
 
     def __repr__(self):
@@ -136,14 +137,14 @@ class Game:
         else:
             return False, None, "You need to join the game first!"
     
-    def Boom(self, x, y, direction, boomType):
+    def Blast(self, x, y, direction, blastType):
         if self.token != '':
             if direction not in ["square", "vertical", "horizontal"]:
                 return False, None, "Wrong direction!"
-            if boomType not in ["attack", "defense"]:
-                return False, None, "Wrong boom type!"
+            if blastType not in ["attack", "defense"]:
+                return False, None, "Wrong blast type!"
             headers = {'content-type': 'application/json'}
-            r = requests.post(hostUrl + 'boom', data=json.dumps({'cellx':x, 'celly':y, 'token':self.token, 'direction':direction, 'boomType':boomType}), headers = headers)
+            r = requests.post(hostUrl + 'blast', data=json.dumps({'cellx':x, 'celly':y, 'token':self.token, 'direction':direction, 'blastType':blastType}), headers = headers)
             if r.status_code == 200:
                 data = r.json()
                 if data['err_code'] == 0:
@@ -177,7 +178,7 @@ class Game:
     def Refresh(self):
         headers = {'content-type': 'application/json'}
         if self.data == None:
-            r = requests.post(hostUrl + 'getgameinfo', data=json.dumps({"protocol":1}), headers = headers)
+            r = requests.post(hostUrl + 'getgameinfo', data=json.dumps({"protocol":2}), headers = headers)
             if r.status_code == 200:
                 self.data = r.json()
                 self.width = self.data['info']['width']

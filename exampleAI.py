@@ -23,7 +23,7 @@ if __name__ == '__main__':
                     # If the cell I got is mine
                     if c.owner == g.uid:
                         if g.gold > 60:
-                            g.BuildBase(x,y)
+                            print(g.BuildBase(x,y))
                         # Pick a random direction based on current cell 
                         d = random.choice([(0,1), (0,-1), (1, 0), (-1,0)])
                         # Get that adjacent cell
@@ -40,4 +40,4 @@ if __name__ == '__main__':
                                 # Refresh the game, get updated game data
                                 g.Refresh()
     else:
-        print "Failed to join the game!"
+        print("Failed to join the game!")
