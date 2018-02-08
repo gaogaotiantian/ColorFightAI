@@ -105,6 +105,7 @@ class Game:
                 f.write(data['token'] + '\n')
             self.token = data['token']
             self.uid   = data['uid']
+            self.data  = None
             self.Refresh()
         else:
             return False
