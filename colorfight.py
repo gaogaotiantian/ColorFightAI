@@ -68,6 +68,7 @@ class Game:
         self.name  = ''
         self.uid   = -1
         self.endTime = 0
+        self.joinEndTime = 0
         self.gameId = 0
         self.users = []
         self.cellNum = 0
@@ -194,6 +195,7 @@ class Game:
                 self.height = self.data['info']['height']
                 self.currTime = self.data['info']['time']
                 self.endTime = self.data['info']['end_time']
+                self.joinEndTime = self.data['info']['join_end_time']
                 self.gameId = self.data['info']['game_id']
                 self.lastUpdate = self.currTime
                 self.RefreshUsers(self.data['users'])
@@ -209,6 +211,7 @@ class Game:
                 self.height = d['info']['height']
                 self.currTime = d['info']['time']
                 self.endTime = self.data['info']['end_time']
+                self.joinEndTime = self.data['info']['join_end_time']
                 self.gameId = self.data['info']['game_id']
                 self.lastUpdate = self.currTime
                 self.RefreshUsers(self.data['users'])
