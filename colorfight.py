@@ -49,6 +49,7 @@ class User:
         self.id            = userData['id']
         self.name          = userData['name']
         self.cdTime        = userData['cd_time']
+        self.buildCdTime   = userData['build_cd_time']
         self.cellNum       = userData['cell_num']
         self.baseNum       = userData['base_num']
         self.goldCellNum   = userData['gold_cell_num']
@@ -74,6 +75,7 @@ class Game:
         self.goldCellNum = 0
         self.energyCellNum = 0
         self.cdTime = 0
+        self.buildCdTime = 0
         self.energy = 0
         self.gold = 0
         self.gameVersion = ''
@@ -177,6 +179,7 @@ class Game:
                 self.gold   = u.gold
                 self.energy = u.energy
                 self.cdTime = u.cdTime
+                self.buildCdTime = u.buildCdTime
                 self.cellNum = u.cellNum
                 self.baseNum = u.baseNum
                 self.goldCellNum = u.goldCellNum
