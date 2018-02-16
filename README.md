@@ -18,15 +18,15 @@ ColorFight is a game where you try to occupy as many cells as possible on the ma
 
 * Golden cells worth 10 times as normal cells.
 
-* Your gold will accumulate 1 per second per golden cell you occupied. The maximum gold is 100.
+* Your gold will accumulate 0.5 per second per golden cell you occupied. The maximum gold is 100.
 
-* When your base cell is occupied by other players, one of your cells that's adjacent to it will become the base. If there's no adjacent cells that's occupied by you, the base will disappear.
+* When your base cell is occupied by other players, one of your cells that's adjacent to it will become the base. If there's no adjacent cells without a building that's occupied by you, the base will disappear.
 
 * If you lose all your bases, you will lose immediately. All your cells will become empty cells.
 
 * You can build a base on any cell that you occupy using 60 gold. Building a base takes 30s and each player can only have 3 bases. You can't build a base if you are currently building one.
 
-* Your energy will accumulate 1 per second per energy cell you occupied. The maximum energy is 100.
+* Your energy will accumulate 0.5 per second per energy cell you occupied. The maximum energy is 100.
 
 * The time to take a cell will be divided by (1 + energy/200).
 
@@ -64,7 +64,7 @@ The module provided some API for the game. You are welcome to add your own API, 
 
 * `BuildBase(x,y)` is the action to build a new base. ex. `g.BuildBase(3,3)`. It will try to build a base on the cell you specified. The return value is similar to `AttackCell()`.
 
-* `Blast(x,y,direction,blastType)` is a multi attack/defense skill you can use if you have enough energy. `direction` should be either `"square"` or `"vertical"` or `"horizontal"`. `direction` defines how the multi operation will be take effect. `"square"` means around the cell you specified(a 3x3 square). `"vertical"` means 4 cells on both the top and bottom of the cell you specified(a 1x9 vertical line). `"horizontal"` means 4 cells on both the left and right of the cell you specified(a 9x1 horizontal line). `blastType` should be either `"attack"` or `"defense"`. `"attack"` takes 1 second and 30 energy and make all the cells you choose(excluding your specified cell) empty(no owners). Also `"attack"` needs to be used on the cell that you own. `"defense"` takes 2 second and 50 energy and makes all the cells you choose(including your specified cell) that owned by you refresh(like you just occupy them). You can apply this skill to any cell you want but it will only refresh your cells in the range.
+* `Blast(x,y,direction,blastType)` is a multi attack/defense skill you can use if you have enough energy. `direction` should be either `"square"` or `"vertical"` or `"horizontal"`. `direction` defines how the multi operation will be take effect. `"square"` means around the cell you specified(a 3x3 square). `"vertical"` means 4 cells on both the top and bottom of the cell you specified(a 1x9 vertical line). `"horizontal"` means 4 cells on both the left and right of the cell you specified(a 9x1 horizontal line). `blastType` should be either `"attack"` or `"defense"`. `"attack"` takes 1 second and 30 energy and make all the cells you choose(excluding your specified cell and the cell that's already owned by you) empty(no owners). Also `"attack"` needs to be used on the cell that you own. `"defense"` takes 2 second and 40 energy and makes all the cells you choose(including your specified cell) that owned by you refresh(like you just occupy them). You can apply this skill to any cell you want but it will only refresh your cells in the range.
 
 ### You also have the following data in `Game`:
 
