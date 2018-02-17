@@ -83,10 +83,14 @@ class Game:
         self.gameVersion = ''
         self.Refresh()
 
-    def JoinGame(self, name, password = None, force = False):
+    def JoinGame(self, name, password = None, force = False, host = None):
         if type(name) != str:
             print("Your name has to be a string!")
             return False
+        if host != None:
+            global hostUrl
+            hostUrl = host
+
         if force == False and os.path.isfile('token'):
             with open('token') as f:
                 self.token = f.readline().strip()
