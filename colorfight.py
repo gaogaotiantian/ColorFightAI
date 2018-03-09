@@ -2,9 +2,11 @@ import requests
 import json
 import os
 import random
+import threading
 
 hostUrl   = 'https://colorfight.herokuapp.com/'
 #hostUrl   = 'http://localhost:8000/'
+cellDataLock = threading.Lock()
 
 def CheckToken(token):
     headers = {'content-type': 'application/json'}
@@ -193,7 +195,9 @@ class Game:
         if self.data == None:
             r = requests.post(hostUrl + 'getgameinfo', data=json.dumps({"protocol":2}), headers = headers)
             if r.status_code == 200:
+                cellDataLock.acquire()
                 self.data = r.json()
+                cellDataLock.release()
                 self.width = self.data['info']['width']
                 self.height = self.data['info']['height']
                 self.currTime = self.data['info']['time']
@@ -218,6 +222,7 @@ class Game:
                 self.gameId = self.data['info']['game_id']
                 self.lastUpdate = self.currTime
                 self.RefreshUsers(self.data['users'])
+                cellDataLock.acquire()
                 for c in d['cells']:
                     cid = c['x'] + c['y']*self.width
                     self.data['cells'][cid] = c
@@ -229,6 +234,7 @@ class Game:
                             cell['t'] = 2;
                         else:
                             cell['t'] = self.GetTakeTimeEq(self.currTime - cell['ot'])
+                cellDataLock.release()
             else:
                 return False
         return True
