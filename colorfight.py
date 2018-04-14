@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import random
+import threading
 
 hostUrl   = 'http://colorfight.herokuapp.com/'
 #hostUrl   = 'http://localhost:8000/'
