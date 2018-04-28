@@ -150,14 +150,27 @@ class Game:
         else:
             return False, None, "You need to join the game first!"
     
-    def Blast(self, x, y, direction, blastType):
+    def Blast(self, x, y, direction):
         if self.token != '':
             if direction not in ["square", "vertical", "horizontal"]:
                 return False, None, "Wrong direction!"
-            if blastType not in ["attack", "defense"]:
-                return False, None, "Wrong blast type!"
             headers = {'content-type': 'application/json'}
-            r = requests.post(hostUrl + 'blast', data=json.dumps({'cellx':x, 'celly':y, 'token':self.token, 'direction':direction, 'blastType':blastType}), headers = headers)
+            r = requests.post(hostUrl + 'blast', data=json.dumps({'cellx':x, 'celly':y, 'token':self.token, 'direction':direction}), headers = headers)
+            if r.status_code == 200:
+                data = r.json()
+                if data['err_code'] == 0:
+                    return True, None, None
+                else:
+                    return False, data['err_code'], data['err_msg']
+            else:
+                return False, None, "Server did not return correctly, status_code ", r.status_code
+        else:
+            return False, None, "You need to join the game first!"
+
+    def MultiAttack(self, x, y):
+        if self.token != '':
+            headers = {'content-type': 'application/json'}
+            r = requests.post(hostUrl + 'multiattack', data=json.dumps({'cellx':x, 'celly':y, 'token':self.token}), headers = headers)
             if r.status_code == 200:
                 data = r.json()
                 if data['err_code'] == 0:
